@@ -3,3 +3,8 @@
 .vscode
 
 .env
+
+terraform.tfstate
+.terraform.lock.hcl
+
+*.exe
