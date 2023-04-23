@@ -19,7 +19,10 @@ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<SUBSCRIP
 tf init
 
 # Clean up terraform files
-tf format
+tf fmt
+
+# Resources under management by TF
+terraform state list
 
 # Validate code
 tf validate
@@ -30,3 +33,16 @@ tf plan
 # Apply the changes
 tf apply
 ```
+
+
+### Explanations
+
+main.tf
+ - Cloud provider: Azure
+ - Defines resource group
+
+compute.tf
+ - Define VMs
+
+container-registry.tf
+ - Define ACR instance
