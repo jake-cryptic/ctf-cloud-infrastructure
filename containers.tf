@@ -13,7 +13,7 @@ resource "azurerm_container_group" "rctf-container-jeffrey" {
   restart_policy      = "OnFailure"
 
   tags = {
-    environment = "production"
+    environment = "Production"
   }
 
   container {
