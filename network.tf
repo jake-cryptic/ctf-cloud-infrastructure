@@ -1,3 +1,15 @@
+resource "azurerm_public_ip" "rctf_main_public_ip" {
+  name                = "rctf-main-public-ip"
+  location            = azurerm_resource_group.rctf.location
+  resource_group_name = azurerm_resource_group.rctf.name
+  allocation_method   = "Dynamic"
+
+  tags = {
+    environment = "Production"
+  }
+}
+
+
 resource "azurerm_virtual_network" "rctf-main-vnet" {
   name                = "rctf-main-vnet"
   address_space       = ["10.0.0.0/16"]
@@ -14,12 +26,14 @@ resource "azurerm_virtual_network" "rctf-main-vnet" {
   }
 }
 
+
 resource "azurerm_subnet" "rctf-main-subnet" {
   name                 = "rctf-main-subnet"
   address_prefixes     = ["10.0.1.0/24"]
   virtual_network_name = azurerm_virtual_network.rctf-main-vnet.name
   resource_group_name  = azurerm_resource_group.rctf.name
 }
+
 
 resource "azurerm_network_security_group" "rctf-main-nsg" {
   name                = "rctf-main-nsg"
@@ -66,6 +80,7 @@ resource "azurerm_network_security_group" "rctf-main-nsg" {
     environment = "Production"
   }
 }
+
 
 resource "azurerm_network_security_group" "rctf-challenge-nsg" {
   name                = "rctf-challenge-nsg"

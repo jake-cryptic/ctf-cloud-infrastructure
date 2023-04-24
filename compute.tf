@@ -4,9 +4,14 @@ resource "azurerm_network_interface" "rctf-main-nic" {
   resource_group_name = azurerm_resource_group.rctf.name
 
   ip_configuration {
-    name                          = "rctf-main-ipconfig"
+    name                          = "rctf-main-ip-config"
     subnet_id                     = azurerm_subnet.rctf-main-subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.rctf_main_public_ip.id
+  }
+
+  tags = {
+    environment = "Production"
   }
 }
 
@@ -33,9 +38,9 @@ resource "azurerm_linux_virtual_machine" "rctf-main-vm" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "22.04-LTS"
-    version   = "latest"
+    offer     = "0001-com-ubuntu-server-jammy-daily"
+    sku       = "22_04-daily-lts-gen2"
+    version   = "22.04.202304200"
   }
 }
 
