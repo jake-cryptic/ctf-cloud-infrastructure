@@ -40,6 +40,10 @@ resource "azurerm_linux_virtual_machine" "rctf-main-vm" {
 }
 
 resource "null_resource" "install_docker" {
+  depends_on = [
+    azurerm_linux_virtual_machine.rctf-main-vm
+  ]
+
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get update",

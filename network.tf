@@ -3,6 +3,15 @@ resource "azurerm_virtual_network" "rctf-main-vnet" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rctf.location
   resource_group_name = azurerm_resource_group.rctf.name
+
+  dns_servers = [
+    "1.1.1.1",
+    "8.8.8.8"
+  ]
+
+  tags = {
+    environment = "Production"
+  }
 }
 
 resource "azurerm_subnet" "rctf-main-subnet" {
