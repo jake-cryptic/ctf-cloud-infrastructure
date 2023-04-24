@@ -9,3 +9,5 @@
 .terraform.lock.hcl
 
 *.exe
+
+local-secrets.tf

@@ -1,5 +1,22 @@
 # ctf-cloud-infrastructure
 
+### Example secrets file
+local-secrets.tf
+```terraform
+locals {
+  key_vault_secret = {
+    secreta = {
+      name  = ""
+      value = ""
+    },
+    secretb = {
+      name  = ""
+      value = ""
+    }
+  }
+}
+
+```
 
 ### Command Index
 ```bash
@@ -7,7 +24,7 @@
 az login
 
 # Set subscription
-az account set --subscription "35akss-subscription-id"
+az account set --subscription "id-here"
 
 # Create Service Principal
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<SUBSCRIPTION_ID>"

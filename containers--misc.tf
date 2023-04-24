@@ -41,50 +41,62 @@ resource "azurerm_container_group" "rctf-containers-challenge-misc" {
     cpu    = "1"
     memory = "1"
 
-    ports {
-      port     = 53
-      protocol = "UDP"
-    }
+    # DNS
+    #ports {
+    #  port     = 53
+    #  protocol = "UDP"
+    #}
+    # Kerberos
     ports {
       port     = 88
       protocol = "TCP"
     }
-    ports {
-      port     = 135
-      protocol = "TCP"
-    }
-    ports {
-      port     = 137
-      protocol = "UDP"
-    }
-    ports {
-      port     = 138
-      protocol = "UDP"
-    }
-    ports {
-      port     = 139
-      protocol = "TCP"
-    }
+    # RPC
+    #ports {
+    #  port     = 135
+    #  protocol = "TCP"
+    #}
+    # Netbios
+    #ports {
+    #  port     = 137
+    #  protocol = "UDP"
+    #}
+    # Netbios
+    #ports {
+    #  port     = 138
+    #  protocol = "UDP"
+    #}
+    # Netbios
+    #ports {
+    #  port     = 139
+    #  protocol = "TCP"
+    #}
+    # LDAP
     ports {
       port     = 389
       protocol = "TCP"
     }
+    # ddm-rdb
     ports {
       port     = 446
       protocol = "TCP"
     }
+    # Kerberos v5
     ports {
       port     = 464
       protocol = "TCP"
     }
+    # LDAPS
     ports {
       port     = 636
       protocol = "TCP"
     }
+    # LDAP GC (Global catalog)
     ports {
       port     = 3268
       protocol = "TCP"
     }
+    # LDAPS GC (Global catalog)
     ports {
       port     = 3269
       protocol = "TCP"
