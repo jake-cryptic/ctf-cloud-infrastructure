@@ -26,7 +26,7 @@ resource "azurerm_linux_virtual_machine" "rctf-main-vm" {
   name                = "rctf-main-vm-platform"
   resource_group_name = azurerm_resource_group.rctf.name
   location            = azurerm_resource_group.rctf.location
-  size                = "Standard_E2as_v4"
+  size                = "Standard_E2as_v4" # change E2as_v4 -> E4as_v4 -> E8_v5 depending on load
   admin_username      = "robyn"
   network_interface_ids = [
     azurerm_network_interface.rctf-main-nic.id,
