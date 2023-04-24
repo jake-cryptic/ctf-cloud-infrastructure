@@ -15,6 +15,13 @@ resource "azurerm_network_interface" "rctf-main-nic" {
   }
 }
 
+
+resource "azurerm_network_interface_security_group_association" "rctf-main-nic-nsg-association" {
+  network_interface_id      = azurerm_network_interface.rctf-main-nic.id
+  network_security_group_id = azurerm_network_security_group.rctf-main-nsg.id
+}
+
+
 resource "azurerm_linux_virtual_machine" "rctf-main-vm" {
   name                = "rctf-main-vm-platform"
   resource_group_name = azurerm_resource_group.rctf.name
