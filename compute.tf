@@ -43,28 +43,3 @@ resource "azurerm_linux_virtual_machine" "rctf-main-vm" {
     version   = "22.04.202304200"
   }
 }
-
-resource "null_resource" "install_docker" {
-  depends_on = [
-    azurerm_linux_virtual_machine.rctf-main-vm
-  ]
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release",
-      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
-      "echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
-      "sudo apt-get update",
-      "sudo apt-get install -y docker-ce docker-ce-cli containerd.io",
-      "sudo systemctl enable docker",
-      "sudo usermod -aG docker $USER"
-    ]
-    connection {
-      type        = "ssh"
-      host        = azurerm_linux_virtual_machine.rctf-main-vm.public_ip_address
-      user        = "robyn"
-      private_key = file("./.id_rsa.pub")
-    }
-  }
-}
