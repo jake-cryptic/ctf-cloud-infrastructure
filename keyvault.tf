@@ -15,7 +15,19 @@ resource "azurerm_key_vault_access_policy" "rctf-main-keyvault-ap" {
   object_id    = data.azurerm_client_config.current.object_id
 
   key_permissions = [
+    "Create",
+    "Decrypt",
+    "Delete",
+    "Encrypt",
     "Get",
+    "Import",
+    "List",
+    "Purge",
+    "Recover",
+    "Restore",
+    "Sign",
+    "Update",
+    "Verify"
   ]
 
   secret_permissions = [
