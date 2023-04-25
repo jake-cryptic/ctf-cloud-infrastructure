@@ -26,7 +26,7 @@ resource "azurerm_linux_virtual_machine" "rctf-main-vm" {
   name                = "rctf-main-vm-platform"
   resource_group_name = azurerm_resource_group.rctf.name
   location            = azurerm_resource_group.rctf.location
-  size                = "Standard_E2as_v4" # change E2as_v4 -> E4as_v4 -> E8_v5 depending on load
+  size                = "Standard_E2as_v4" # change E2as_v4 -> E4as_v4 -> E8_v5 -> D16s_v5 depending on load
   admin_username      = "robyn"
   network_interface_ids = [
     azurerm_network_interface.rctf-main-nic.id,
@@ -48,5 +48,19 @@ resource "azurerm_linux_virtual_machine" "rctf-main-vm" {
     offer     = "0001-com-ubuntu-server-jammy-daily"
     sku       = "22_04-daily-lts-gen2"
     version   = "22.04.202304200"
+  }
+}
+
+resource "azurerm_dev_test_global_vm_shutdown_schedule" "rctf-main-vm-auto-shutdown" {
+  virtual_machine_id = azurerm_linux_virtual_machine.rctf-main-vm.id
+  location           = azurerm_resource_group.rctf.location
+  enabled            = true
+
+  daily_recurrence_time = "0000"
+  timezone              = "GMT Standard Time"
+
+  notification_settings {
+    enabled         = false
+    time_in_minutes = "60"
   }
 }
