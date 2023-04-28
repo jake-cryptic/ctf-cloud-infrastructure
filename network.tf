@@ -9,6 +9,17 @@ resource "azurerm_public_ip" "rctf_main_public_ip" {
   }
 }
 
+resource "azurerm_public_ip" "rctf_secondary_public_ip" {
+  name                = "rctf-secondary-public-ip"
+  location            = azurerm_resource_group.rctf.location
+  resource_group_name = azurerm_resource_group.rctf.name
+  allocation_method   = "Static"
+
+  tags = {
+    environment = "Production"
+  }
+}
+
 
 resource "azurerm_virtual_network" "rctf-main-vnet" {
   name                = "rctf-main-vnet"
@@ -95,6 +106,30 @@ resource "azurerm_network_security_group" "rctf-challenge-nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "allow-all-except-docker"
+    priority                   = 400
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_ranges    = ["0-2374", "2377-65535"]
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "allow-udp-ports-above-2377"
+    priority                   = 500
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Udp"
+    source_port_range          = "*"
+    destination_port_range     = "2378-65535"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
