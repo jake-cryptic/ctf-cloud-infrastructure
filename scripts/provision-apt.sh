@@ -5,7 +5,7 @@ apt-get update
 apt-get upgrade -y
 
 # Install required tools
-apt-get install -y ca-certificates curl htop git gnupg openssh-server openssl systemctl wget
+apt-get install -y ca-certificates curl htop git gnupg openssh-server openssl wget
 
 # Install docker repo
 sudo install -m 0755 -d /etc/apt/keyrings

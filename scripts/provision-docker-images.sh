@@ -1,6 +1,7 @@
 #!/bin/bash
 
 docker login robynctf.azurecr.io -u robynctf
+docker login -u jakemcneill83
 
 
 docker image pull robynctf.azurecr.io/misc_directorysnooping
