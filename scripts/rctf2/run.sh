@@ -16,7 +16,7 @@ docker run \
 docker run -d \
     --name rctf_directorysnooping_app \
     --restart unless-stopped \
-    -h ad-prd01.internal.clam-corp.com \
+    -h ad.rctf-secondary.cybersoc.wales \
     --cap-add SYS_ADMIN \
     --cap-add DAC_READ_SEARCH \
     -e DOMAIN_NAME=internal.clam-corp.com \
