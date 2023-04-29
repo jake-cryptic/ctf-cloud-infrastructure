@@ -71,6 +71,7 @@ docker run \
 docker image pull robynctf.azurecr.io/openai_ctf_helper
 docker run \
     -d \
+    --env-file .env \
     -p 80:5000 \
     --restart unless-stopped \
     --name openai_ctf_helper_app \
