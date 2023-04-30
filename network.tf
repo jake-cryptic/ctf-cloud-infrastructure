@@ -102,7 +102,7 @@ resource "azurerm_network_security_group" "rctf-challenge-nsg" {
     name                       = "allow-all"
     priority                   = 100
     direction                  = "Inbound"
-    access                     = "Allow"
+    access                     = "Deny"
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "*"
@@ -118,18 +118,6 @@ resource "azurerm_network_security_group" "rctf-challenge-nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_ranges    = ["0-2374", "2377-65535"]
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "allow-udp-ports-above-2377"
-    priority                   = 500
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Udp"
-    source_port_range          = "*"
-    destination_port_range     = "2378-65535"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
